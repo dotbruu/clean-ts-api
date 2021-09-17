@@ -1,5 +1,8 @@
 node_modules
 dist
 coverage
+globalConfig.json
+data
+!src/data
 .DS_Store
 
