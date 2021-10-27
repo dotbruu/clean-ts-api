@@ -2,7 +2,7 @@ import { SignUpController } from './signup'
 import { MissingParamError, InvalidParamError } from '../../errors'
 import { EmailValidator, AccountModel, AddAccount, AddAccountParams, HttpRequest } from './signup-protocols'
 import { ServerError } from '../../errors/server-error'
-import { ok, serverError, badRequest } from '../../helpers/http-helper'
+import { ok, badRequest } from '../../helpers/http-helper'
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
@@ -21,15 +21,6 @@ const makeAddAccount = (): AddAccount => {
   }
   return new AddAccountStub()
 }
-
-// const makeEmailValidatorWithError = (): EmailValidator => {
-//   class EmailValidatorStub implements EmailValidator {
-//     isValid (email: string): boolean {
-//       throw new Error()
-//     }
-//   }
-//   return new EmailValidatorStub()
-// }
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
