@@ -13,7 +13,7 @@ const makeSut = (): SutTypes => {
 }
 
 describe('CompareField Validation', () => {
-  test('Should return a MissingParamError if validation fails', () => {
+  test('Should return a InvalidParamError if validation fails', () => {
     const { sut } = makeSut()
     const error = sut.validate({
       any_field: 'any_field',
@@ -22,7 +22,7 @@ describe('CompareField Validation', () => {
     expect(error).toEqual(new InvalidParamError('any_field'))
   })
 
-  test('Should not return a MissingParamError if validation succeds', () => {
+  test('Should not return a InvalidParamError if validation succeds', () => {
     const { sut } = makeSut()
     const error = sut.validate({
       any_field: 'any_field',
