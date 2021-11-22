@@ -5,8 +5,12 @@ export class RequiredFieldValidation implements Validation {
   constructor (private readonly fieldname: string) {}
 
   validate (input: any): Error {
-    if (!input[this.fieldname]) {
+    const hasField = input[this.fieldname]
+
+    if (!hasField) {
       return new MissingParamError(this.fieldname)
     }
+
+    return null
   }
 }
