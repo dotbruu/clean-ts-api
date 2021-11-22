@@ -8,8 +8,13 @@ export class CompareFieldValidation implements Validation {
   ) {}
 
   validate (input: any): Error {
-    if (input[this.fieldname] !== input[this.fieldToCompareName]) {
+    const hasField = input[this.fieldname]
+    const hasFieldToCompare = input[this.fieldToCompareName]
+
+    if (hasField !== hasFieldToCompare) {
       return new InvalidParamError(this.fieldname)
     }
+
+    return null
   }
 }
