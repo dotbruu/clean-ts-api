@@ -6,6 +6,8 @@
     "target": "ES2019",
     "esModuleInterop": true,
     "baseUrl": "./src",
+    "sourceMap": true,
+    "rootDir": "src",
     "paths": {
       "@presentation/*": ["presentation/*"],
     },
