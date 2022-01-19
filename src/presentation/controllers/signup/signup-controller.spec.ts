@@ -2,7 +2,7 @@ import { SignUpController } from './signup-controller'
 import { MissingParamError } from '../../errors'
 import { AccountModel, AddAccount, AddAccountParams, HttpRequest, Validation, Authentication, AuthenticationModel } from './signup-controller-protocols'
 import { ServerError } from '../../errors/server-error'
-import { ok, badRequest } from '../../helpers/http/http-helper'
+import { ok, badRequest, serverError } from '../../helpers/http/http-helper'
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -128,5 +128,15 @@ describe('SignUp Controller', () => {
       email: 'any_email@mail.com',
       password: 'any_password'
     })
+  })
+
+  test('Should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
